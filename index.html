@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algorithms</title>
+  </head>
+
+  <script>
+    console.log("hello world");
+
+    function mergeSort(array) {
+      if (array.length <= 1) {
+        return array;
+      } else {
+        let half = Math.ceil(array.length / 2);
+        let leftHalf = array.slice(0, half);
+        let rightHalf = array.slice(half);
+
+        let mergeSortLeftHalf = mergeSort(leftHalf);
+        let mergeSortRightHalf = mergeSort(rightHalf);
+
+        let sortedArray = merge(mergeSortLeftHalf, mergeSortRightHalf);
+        return sortedArray;
+      }
+
+      function merge(leftHalf, rightHalf) {
+        let sort = [];
+        let leftHalfIndex = 0;
+        let rightHalfIndex = 0;
+
+        while (
+          leftHalfIndex < leftHalf.length &&
+          rightHalfIndex < rightHalf.length
+        ) {
+          if (leftHalf[leftHalfIndex] <= rightHalf[rightHalfIndex]) {
+            sort.push(leftHalf[leftHalfIndex]);
+            leftHalfIndex++;
+          } else if (rightHalf[rightHalfIndex] <= leftHalf[leftHalfIndex]) {
+            sort.push(rightHalf[rightHalfIndex]);
+            rightHalfIndex++;
+          }
+        }
+
+        sort = sort.concat(leftHalf.slice(leftHalfIndex));
+        sort = sort.concat(rightHalf.slice(rightHalfIndex));
+
+        return sort;
+      }
+    }
+
+    let array1 = [3, 2, 1, 13, 8, 5, 0, 1];
+    let array2 = [105, 79, 100, 110];
+
+    let sortedArray1 = mergeSort(array1);
+    console.log(sortedArray1);
+    let sortedArray2 = mergeSort(array2);
+    console.log(sortedArray2);
+  </script>
+  <body>
+    <h1>Algorithms</h1>
+  </body>
+</html>
